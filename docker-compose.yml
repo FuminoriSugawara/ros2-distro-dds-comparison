@@ -1,0 +1,48 @@
+x-common: &common
+  build:
+    context: .
+    args:
+      ROS_DISTRO: ${ROS_DISTRO}
+  environment:
+    RMW_IMPLEMENTATION: rmw_fastrtps_cpp
+    FASTRTPS_DEFAULT_PROFILES_FILE: /root/fastdds_profiles.xml
+  ipc: host
+  network_mode: host
+  shm_size: 512m
+
+services:
+  humble_talker:
+    <<: *common
+    image: ros2-humble-fastdds
+    build:
+      context: .
+      args:
+        ROS_DISTRO: humble
+    command: ["ros2", "run", "demo_nodes_cpp", "talker"]
+
+  humble_listener:
+    <<: *common
+    image: ros2-humble-fastdds
+    build:
+      context: .
+      args:
+        ROS_DISTRO: humble
+    command: ["ros2", "run", "demo_nodes_cpp", "listener"]
+
+  jazzy_talker:
+    <<: *common
+    image: ros2-jazzy-fastdds
+    build:
+      context: .
+      args:
+        ROS_DISTRO: jazzy
+    command: ["ros2", "run", "demo_nodes_cpp", "talker"]
+
+  jazzy_listener:
+    <<: *common
+    image: ros2-jazzy-fastdds
+    build:
+      context: .
+      args:
+        ROS_DISTRO: jazzy
+    command: ["ros2", "run", "demo_nodes_cpp", "listener"]

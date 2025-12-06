@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dds>
+  <profiles>
+    <!-- デフォルトの参加者プロファイル。必要に応じて data-sharing/shm を切り替えてください。 -->
+    <participant profile_name="default_participant" is_default_profile="true">
+      <rtps>
+        <use_builtin_transports>true</use_builtin_transports>
+        <properties>
+          <!-- 共有メモリの自動リサイズを有効化 -->
+          <property>
+            <name>fastdds.shm.automatic_resize</name>
+            <value>true</value>
+          </property>
+          <!-- data-sharing を強制的に無効化したい場合は以下を true にする -->
+          <!--
+          <property>
+            <name>fastdds.shm.disable</name>
+            <value>true</value>
+          </property>
+          -->
+        </properties>
+      </rtps>
+    </participant>
+  </profiles>
+</dds>
