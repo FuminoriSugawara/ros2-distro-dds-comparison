@@ -6,20 +6,23 @@
       <rtps>
         <!-- Fast DDS が提供するデフォルトトランスポートを使う（tag 名は camelCase が正しい） -->
         <useBuiltinTransports>true</useBuiltinTransports>
-        <properties>
-          <!-- 共有メモリの自動リサイズを有効化 -->
-          <property>
-            <name>fastdds.shm.automatic_resize</name>
-            <value>true</value>
-          </property>
-          <!-- data-sharing を強制的に無効化したい場合は以下を true にする -->
-          <!--
-          <property>
-            <name>fastdds.shm.disable</name>
-            <value>true</value>
-          </property>
-          -->
-        </properties>
+        <!-- properties は propertiesPolicy 配下に置く必要がある -->
+        <propertiesPolicy>
+          <properties>
+            <!-- 共有メモリの自動リサイズを有効化 -->
+            <property>
+              <name>fastdds.shm.automatic_resize</name>
+              <value>true</value>
+            </property>
+            <!-- data-sharing を強制的に無効化したい場合は以下を true にする -->
+            <!--
+            <property>
+              <name>fastdds.shm.disable</name>
+              <value>true</value>
+            </property>
+            -->
+          </properties>
+        </propertiesPolicy>
       </rtps>
     </participant>
   </profiles>
