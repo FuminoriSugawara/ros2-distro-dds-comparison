@@ -3,6 +3,7 @@ x-common: &common
     context: .
     args:
       ROS_DISTRO: ${ROS_DISTRO}
+      BASE_IMAGE: ${BASE_IMAGE:-ros:${ROS_DISTRO}-ros-base}
   environment:
     RMW_IMPLEMENTATION: rmw_fastrtps_cpp
     FASTRTPS_DEFAULT_PROFILES_FILE: /root/fastdds_profiles.xml
@@ -13,20 +14,22 @@ x-common: &common
 services:
   humble_talker:
     <<: *common
-    image: ros2-humble-fastdds
+    image: ${IMAGE_TALKER:-ros2-humble-fastdds}
     build:
       context: .
       args:
         ROS_DISTRO: humble
+        BASE_IMAGE: ${BASE_IMAGE_TALKER:-${BASE_IMAGE:-ros:${ROS_DISTRO}-ros-base}}
     command: ["ros2", "run", "demo_nodes_cpp", "talker"]
 
   humble_listener:
     <<: *common
-    image: ros2-humble-fastdds
+    image: ${IMAGE_LISTENER:-ros2-humble-fastdds}
     build:
       context: .
       args:
         ROS_DISTRO: humble
+        BASE_IMAGE: ${BASE_IMAGE_LISTENER:-${BASE_IMAGE:-ros:${ROS_DISTRO}-ros-base}}
     command: ["ros2", "run", "demo_nodes_cpp", "listener"]
 
   jazzy_talker:

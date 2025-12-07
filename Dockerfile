@@ -1,5 +1,6 @@
 ARG ROS_DISTRO=humble
-FROM ros:${ROS_DISTRO}-ros-base
+ARG BASE_IMAGE=ros:${ROS_DISTRO}-ros-base
+FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
